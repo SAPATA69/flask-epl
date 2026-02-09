@@ -9,12 +9,13 @@ app = Flask(__name__)
 instance_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'instance')
 os.makedirs(instance_path, exist_ok=True)
 
+# Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///epl.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'dev-secret-key-change-in-production'  # จำเป็นสำหรับ flash messages
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# ลบบรรทัดนี้ออก
-# from epl import routes, models
-
+# ✅ เปิด import (ลบ comment ออก)
+from epl import routes, models
